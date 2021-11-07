@@ -101,4 +101,10 @@ describe('Food tests', () => {
         expect(JSON.parse(getResponse.body)).toEqual(expect.not.arrayContaining([hambi]))
 
     })
+
+    it('DELETE hívás kitörli az elemet', async () => {
+        const deleteResponse = await client.delete('/api/food/ervenytelen')
+        expect(deleteResponse.code).toBe(404)
+
+    })
 })
