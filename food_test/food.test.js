@@ -81,4 +81,11 @@ describe('Food tests', () => {
         const putResponseBody = JSON.parse(putResponse.body)
         expect(putResponseBody).toEqual(hambi)
     })
+
+    it('érvénytelen id-ra PUT 404-es választ adjon', async () => {
+        let hambi = {'name': 'hambi', 'calories': 100}
+        const nemHambiId = 'érvénytelen'
+        const getResponse = await client.put('/api/drink/' + nemHambiId, hambi)
+        expect(getResponse.code).toBe(404)
+    })
 })
