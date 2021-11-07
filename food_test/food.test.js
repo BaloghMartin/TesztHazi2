@@ -107,4 +107,18 @@ describe('Food tests', () => {
         expect(deleteResponse.code).toBe(404)
 
     })
+
+    it ('PUT esetén ha különbözik az url-ben és a body-ban az id, 400-as hibakódot kapjunk', async () => {
+        let hambi = {'name': 'hambi', 'calories': 100}
+        const hambiResponse = await client.post('/api/food', hambi)
+        const hambiId = JSON.parse(hambiResponse.body).id
+        hambi.id = 'érvénytelen'
+        hambi.name = 'nem hambi'
+        hambi.calories= 1
+        const putResponse = await client.put('/api/food/' + hambiId, hambi)
+     
+        expect(putResponse.code).toBe(400)
+
+    })
+
 })

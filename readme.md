@@ -21,8 +21,16 @@ Az alábbi teszteket implementáld:
 1. `/api/food` végponton létrehozott elem a `/api/food/\<id\>` végpontra küldött GET hívással letölthető (GET 200 választ ad) 
 1. `/api/food/\<id\>` végpontra küldött GET hívás 404 választ ad érvénytelen id esetén 
 1. `/api/food/\<id\>` végpontra küldött PUT hívással a korábban létrehozott elem módosítható, és a módosítást követően egy GET hívás már a módosított állapotot adja vissza (PUT és GET is 200 választ ad) 
+
+
 1. `/api/food/\<id\>` végpontra küldött PUT hívás 404-et ad érvénytelen id esetén
+
+
 1. `/api/food/\<id\>` végpontra küldött DELETE hívás kitörli a korábban létrehozott elemet és azt követően a `/api/food` végpontra küldött GET hívás eredményében már nem található (DELETE 204 választ ad sikeres törlés esetén)
+
+
 1. `/api/food/\<id\>` végponta küldött DELETE hívás 404-et ad érvénytelen id esetében
-1. `/api/food/\<id\>` végpontra küldött PUT esetében amennyiben az url-ben és a bodyban küldött id különbözik akkot 400 hibakódot ad
+
+
+1. `/api/food/\<id\>` végpontra küldött PUT esetében amennyiben az url-ben és a bodyban küldött id különbözik akkor 400 hibakódot ad
 
