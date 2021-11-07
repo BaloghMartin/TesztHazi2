@@ -28,5 +28,26 @@ describe('Food tests', () => {
         expect(postResponse.code).toBe(400)
     })
 
+    it('post-tal létrehozott elemeket get-tel tömbként visszaadja', async () => {
+        let hambi = {'name': 'hambi', 'calories': 100}
+        let wampa = {'name': 'wampa', 'calories': 1000}
+
+
+        const hambiResponse = await client.post('/api/food', hambi)
+        const hambiId = JSON.parse(hambiResponse.body).id
+        const wampaResponse = await client.post('/api/food', wampa)
+        const wampaId = JSON.parse(wampaResponse.body).id
+
+        const getResponse = await client.get('/api/food')
+        expect(getResponse.code).toBe(200)
+
+        const getResponseBody = JSON.parse(getResponse.body)
+        hambi.id = hambiId
+        wampa.id = wampaId
+
+        expect(getResponseBody).toContainEqual(hambi)
+        expect(getResponseBody).toContainEqual(wampa)
+    })
+
     
 })
