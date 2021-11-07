@@ -85,7 +85,20 @@ describe('Food tests', () => {
     it('érvénytelen id-ra PUT 404-es választ adjon', async () => {
         let hambi = {'name': 'hambi', 'calories': 100}
         const nemHambiId = 'érvénytelen'
-        const getResponse = await client.put('/api/drink/' + nemHambiId, hambi)
-        expect(getResponse.code).toBe(404)
+        const putResponse = await client.put('/api/drink/' + nemHambiId, hambi)
+        expect(putResponse.code).toBe(404)
+    })
+
+    it('DELETE hívás kitörli az elemet', async () => {
+        let hambi = {'name': 'hambi', 'calories': 100}
+        const hambiResponse = await client.post('/api/food', hambi)
+        const hambiId = JSON.parse(hambiResponse.body).id
+        hambi.id = hambiId
+        const deleteResponse = await client.delete('/api/food/' + hambiId)
+        expect(deleteResponse.code).toBe(204)
+
+        const getResponse = await client.get('/api/food/')
+        expect(JSON.parse(getResponse.body)).toEqual(expect.not.arrayContaining([hambi]))
+
     })
 })
