@@ -84,10 +84,18 @@ describe('Food tests', () => {
 
     it('érvénytelen id-ra PUT 404-es választ adjon', async () => {
         let hambi = {'name': 'hambi', 'calories': 100}
-        const nemHambiId = 'érvénytelen'
-        const putResponse = await client.put('/api/drink/' + nemHambiId, hambi)
+        const hambiResponse = await client.post('/api/food', hambi)
+        const hambiId = 1
+        
+        hambi.name = 'nem hambi'
+        hambi.calories= 1
+        const putResponse = await client.put('/api/food/' + hambiId, hambi)
+      
         expect(putResponse.code).toBe(404)
+     
     })
+
+
 
     it('DELETE hívás kitörli az elemet', async () => {
         let hambi = {'name': 'hambi', 'calories': 100}
@@ -120,5 +128,7 @@ describe('Food tests', () => {
         expect(putResponse.code).toBe(400)
 
     })
+    
 
+    
 })
