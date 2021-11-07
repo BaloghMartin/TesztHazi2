@@ -95,6 +95,17 @@ describe('Food tests', () => {
      
     })
 
+    it('érvénytelen id-ra PUT 404-es választ adjon, ha nincs még elem akkor is', async () => {
+        let hambi = {'name': 'hambi', 'calories': 100}
+        
+        
+        const putResponse = await client.put('/api/food/' + 123, hambi)
+      
+        expect(putResponse.code).toBe(404)
+     
+    })
+
+
 
 
     it('DELETE hívás kitörli az elemet', async () => {
