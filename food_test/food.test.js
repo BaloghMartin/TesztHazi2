@@ -66,4 +66,19 @@ describe('Food tests', () => {
         const getResponse = await client.get('/api/drink/érvénytelenid')
         expect(getResponse.code).toBe(404)
     })
+
+    
+    it ('PUT-tal lehessen frissíteni a kajcsi adatait', async () => {
+        let hambi = {'name': 'hambi', 'calories': 100}
+        const hambiResponse = await client.post('/api/food', hambi)
+        const hambiId = JSON.parse(hambiResponse.body).id
+        hambi.id = hambiId
+        hambi.name = 'nem hambi'
+        hambi.calories= 1
+        const putResponse = await client.put('/api/food/' + hambiId, hambi)
+        const getResponse = await client.get('/api/food/' + hambiId)
+        expect(getResponse.code).toBe(200)
+        const putResponseBody = JSON.parse(putResponse.body)
+        expect(putResponseBody).toEqual(hambi)
+    })
 })
