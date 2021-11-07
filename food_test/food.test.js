@@ -62,4 +62,8 @@ describe('Food tests', () => {
         expect(getResponseBody).toEqual(hambi)
     })
     
+    it('érvénytelen id-ra GET 404-es választ adjon', async () => {
+        const getResponse = await client.get('/api/drink/érvénytelenid')
+        expect(getResponse.code).toBe(404)
+    })
 })
