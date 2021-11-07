@@ -49,5 +49,17 @@ describe('Food tests', () => {
         expect(getResponseBody).toContainEqual(wampa)
     })
 
+    it('id végpontra küldött get-tel megkapjuk a létrehozott elemet', async () => {
+        let hambi = {'name': 'hambi', 'calories': 100}
+        const hambiResponse = await client.post('/api/food', hambi)
+        const hambiId = JSON.parse(hambiResponse.body).id
+        
+        const getResponse = await client.get('/api/food/' + hambiId)
+        expect(getResponse.code).toBe(200)
+        hambi.id = hambiId
+
+        const getResponseBody = JSON.parse(getResponse.body)
+        expect(getResponseBody).toEqual(hambi)
+    })
     
 })
